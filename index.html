@@ -202,6 +202,49 @@
     font-weight: 600;
   }
 
+  .place-map-link {
+    display: inline-block;
+    margin-top: 2px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-accent-700);
+    text-decoration: none;
+  }
+
+  .place-map-link:hover {
+    color: var(--color-accent-900);
+    text-decoration: underline;
+  }
+
+  .day-map {
+    margin-bottom: var(--space-4);
+  }
+
+  .day-map iframe {
+    display: block;
+    width: 100%;
+    height: 220px;
+    border: 1px solid var(--color-neutral-300);
+  }
+
+  .map-actions {
+    margin-top: var(--space-2);
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .map-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-accent-700);
+    text-decoration: none;
+  }
+
+  .map-link:hover {
+    color: var(--color-accent-900);
+    text-decoration: underline;
+  }
+
   .day-divider {
     height: 1px;
     background: var(--color-neutral-300);
@@ -273,6 +316,7 @@
     @page { size: A4; }
     body { background: #ffffff; }
     .day-row { break-inside: avoid; page-break-inside: avoid; }
+    .no-print { display: none !important; }
   }
 </style>
 </head>
@@ -310,6 +354,12 @@
               <span class="tag-accent">590 km &middot; 11h 30m</span>
             </div>
           </div>
+          <div class="day-map no-print">
+            <iframe src="https://www.google.com/maps?saddr=Chennai,+India&daddr=Madikeri,+Karnataka,+India&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Day 1 route: Chennai to Madikeri"></iframe>
+            <div class="map-actions">
+              <a class="map-link" href="https://www.google.com/maps/dir/?api=1&origin=Chennai,+India&destination=Madikeri,+Karnataka,+India&travelmode=driving" target="_blank" rel="noopener">Get directions &#8599;</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -328,26 +378,37 @@
             <div class="day-date">Sat 15 Nov</div>
           </div>
           <div class="day-title">Madikeri sightseeing</div>
+          <div class="day-map no-print">
+            <iframe src="https://www.google.com/maps?q=Madikeri,+Karnataka,+India&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Day 2 area: Madikeri"></iframe>
+            <div class="map-actions">
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Madikeri,+Karnataka,+India" target="_blank" rel="noopener">View area on map &#8599;</a>
+            </div>
+          </div>
           <div class="places-grid">
             <div>
               <img class="place-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/Abbey_Falls_New.jpg/960px-Abbey_Falls_New.jpg" alt="Abbey Falls">
               <div class="place-name">Abbey Falls</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Abbey+Falls,+Madikeri,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
             <div>
               <img class="place-photo" src="https://upload.wikimedia.org/wikipedia/commons/c/c6/Raja_seat_madikeri.JPG" alt="Raja's Seat viewpoint">
               <div class="place-name">Raja's Seat viewpoint</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Raja%27s+Seat,+Madikeri,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
             <div>
               <img class="place-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Namrodoling_Monastery_Bylakuppe2.jpg/960px-Namrodoling_Monastery_Bylakuppe2.jpg" alt="Namdroling (Golden Temple) monastery">
               <div class="place-name">Namdroling (Golden Temple) monastery</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Namdroling+Monastery,+Bylakuppe,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
             <div>
               <img class="place-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Thalakkaveri_Temple%2C_Karnataka.jpg/960px-Thalakkaveri_Temple%2C_Karnataka.jpg" alt="Talakaveri & Bhagamandala">
               <div class="place-name">Talakaveri &amp; Bhagamandala</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Talakaveri,+Karnataka,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
             <div>
               <img class="place-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Mandalpatti_Hills.jpg/960px-Mandalpatti_Hills.jpg" alt="Mandalpatti sunset jeep">
               <div class="place-name">Mandalpatti sunset jeep</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Mandalpatti,+Karnataka,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
           </div>
         </div>
@@ -377,18 +438,27 @@
               <span class="tag-accent">40 km &middot; 1h 15m</span>
             </div>
           </div>
+          <div class="day-map no-print">
+            <iframe src="https://www.google.com/maps?saddr=Madikeri,+Karnataka,+India&daddr=Barapole+River,+Karnataka,+India&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Day 3 route: Madikeri to Barapole river"></iframe>
+            <div class="map-actions">
+              <a class="map-link" href="https://www.google.com/maps/dir/?api=1&origin=Madikeri,+Karnataka,+India&destination=Barapole+River,+Karnataka,+India&travelmode=driving" target="_blank" rel="noopener">Get directions &#8599;</a>
+            </div>
+          </div>
           <div class="places-grid">
             <div>
               <img class="place-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Whitewater_rafting_in_Coorg%2C_India.jpg/960px-Whitewater_rafting_in_Coorg%2C_India.jpg" alt="Barapole river rafting (Grade II–IV)">
               <div class="place-name">Barapole river rafting (Grade II&ndash;IV)</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Barapole+River+rafting,+Coorg,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
             <div>
               <img class="place-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Kaveri_by_Dubare_Forest.jpg/960px-Kaveri_by_Dubare_Forest.jpg" alt="Dubare Elephant Camp">
               <div class="place-name">Dubare Elephant Camp</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Dubare+Elephant+Camp,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
             <div>
               <img class="place-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/India_coffee_forests.jpg/960px-India_coffee_forests.jpg" alt="Coffee estate walk">
               <div class="place-name">Coffee estate walk</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Coorg+coffee+plantation,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
           </div>
         </div>
@@ -418,22 +488,32 @@
               <span class="tag-accent">125 km &middot; 3h</span>
             </div>
           </div>
+          <div class="day-map no-print">
+            <iframe src="https://www.google.com/maps?saddr=Madikeri,+Karnataka,+India&daddr=Wayanad,+Kerala,+India&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Day 4 route: Madikeri to Wayanad"></iframe>
+            <div class="map-actions">
+              <a class="map-link" href="https://www.google.com/maps/dir/?api=1&origin=Madikeri,+Karnataka,+India&destination=Wayanad,+Kerala,+India&travelmode=driving" target="_blank" rel="noopener">Get directions &#8599;</a>
+            </div>
+          </div>
           <div class="places-grid">
             <div>
               <img class="place-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Chembra.jpg/960px-Chembra.jpg" alt="Chembra Peak">
               <div class="place-name">Chembra Peak</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Chembra+Peak,+Wayanad,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
             <div>
               <img class="place-photo" src="https://upload.wikimedia.org/wikipedia/en/0/0d/PookodeLake.jpg" alt="Pookode Lake">
               <div class="place-name">Pookode Lake</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Pookode+Lake,+Wayanad,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
             <div>
               <img class="place-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Edakkal_Cave.jpg/960px-Edakkal_Cave.jpg" alt="Edakkal Caves">
               <div class="place-name">Edakkal Caves</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Edakkal+Caves,+Wayanad,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
             <div>
               <img class="place-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Banasurasagar_Main_Dam.jpg/960px-Banasurasagar_Main_Dam.jpg" alt="Banasura Sagar Dam">
               <div class="place-name">Banasura Sagar Dam</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Banasura+Sagar+Dam,+Wayanad,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
           </div>
         </div>
@@ -463,14 +543,22 @@
               <span class="tag-accent">285 km &middot; 6h</span>
             </div>
           </div>
+          <div class="day-map no-print">
+            <iframe src="https://www.google.com/maps?saddr=Wayanad,+Kerala,+India&daddr=Bengaluru,+India&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Day 5 route: Wayanad to Bengaluru"></iframe>
+            <div class="map-actions">
+              <a class="map-link" href="https://www.google.com/maps/dir/?api=1&origin=Wayanad,+Kerala,+India&destination=Bengaluru,+India&travelmode=driving" target="_blank" rel="noopener">Get directions &#8599;</a>
+            </div>
+          </div>
           <div class="places-grid">
             <div>
               <img class="place-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/Prince_in_the_Jungle_crop.jpg/960px-Prince_in_the_Jungle_crop.jpg" alt="Bandipur forest road">
               <div class="place-name">Bandipur forest road</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Bandipur+National+Park,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
             <div>
               <img class="place-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Kerala_-_Sentinel_Falls_%2815784346247%29.jpg/960px-Kerala_-_Sentinel_Falls_%2815784346247%29.jpg" alt="Soochipara Falls">
               <div class="place-name">Soochipara Falls</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Soochipara+Falls,+Wayanad,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
           </div>
         </div>
@@ -499,14 +587,22 @@
               <span class="tag-accent">350 km &middot; 5h 30m</span>
             </div>
           </div>
+          <div class="day-map no-print">
+            <iframe src="https://www.google.com/maps?saddr=Bengaluru,+India&daddr=Chennai,+India&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Day 6 route: Bengaluru to Chennai"></iframe>
+            <div class="map-actions">
+              <a class="map-link" href="https://www.google.com/maps/dir/?api=1&origin=Bengaluru,+India&destination=Chennai,+India&travelmode=driving" target="_blank" rel="noopener">Get directions &#8599;</a>
+            </div>
+          </div>
           <div class="places-grid">
             <div>
               <img class="place-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Glasshouse_and_fountain_at_lalbagh.jpg/960px-Glasshouse_and_fountain_at_lalbagh.jpg" alt="Lalbagh Botanical Garden">
               <div class="place-name">Lalbagh Botanical Garden</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Lalbagh+Botanical+Garden,+Bengaluru,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
             <div>
               <img class="place-photo" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Bangalore_Mysore_Maharaja_Palace.jpg/960px-Bangalore_Mysore_Maharaja_Palace.jpg" alt="Bangalore Palace">
               <div class="place-name">Bangalore Palace</div>
+              <a class="place-map-link no-print" href="https://www.google.com/maps/search/?api=1&query=Bangalore+Palace,+Bengaluru,+India" target="_blank" rel="noopener">View on map &#8599;</a>
             </div>
           </div>
         </div>
