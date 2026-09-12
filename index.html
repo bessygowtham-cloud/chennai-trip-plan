@@ -72,7 +72,7 @@
   .day-row {
     display: flex;
     gap: var(--space-4);
-    align-items: flex-start;
+    align-items: stretch;
     break-inside: avoid;
     page-break-inside: avoid;
   }
@@ -131,6 +131,18 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--color-neutral-700);
+  }
+
+  .time-pill {
+    display: inline-block;
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--color-accent-700);
+    color: #ffffff;
   }
 
   .day-title {
@@ -335,6 +347,7 @@
           <div class="day-kicker-row">
             <div class="day-num">Day 1</div>
             <div class="day-date">Fri 14 Nov</div>
+            <span class="time-pill">11 PM</span>
           </div>
           <div class="day-title">Overnight drive, arrive Madikeri</div>
           <div class="route-strip">
