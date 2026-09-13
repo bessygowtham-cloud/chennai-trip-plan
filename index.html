@@ -24,6 +24,14 @@
     --space-5: 18px;
     --space-6: 20px;
     --space-8: 32px;
+
+    /* Per-day accent palette used across the timeline, badges and cards */
+    --day1: #4f46e5;   --day1-glow: rgba(79,70,229,0.30);
+    --day2: #0d9488;   --day2-glow: rgba(13,148,136,0.30);
+    --day3: #d97706;   --day3-glow: rgba(217,119,6,0.30);
+    --day4: #e11d48;   --day4-glow: rgba(225,29,72,0.28);
+    --day5: #059669;   --day5-glow: rgba(5,150,105,0.30);
+    --day6: #7c3aed;   --day6-glow: rgba(124,58,237,0.30);
   }
 
   * { box-sizing: border-box; }
@@ -36,7 +44,13 @@
 
   body {
     margin: 0;
-    background: var(--color-bg);
+    background:
+      radial-gradient(circle at 8% 8%, rgba(79,70,229,0.10), transparent 42%),
+      radial-gradient(circle at 92% 15%, rgba(217,119,6,0.10), transparent 42%),
+      radial-gradient(circle at 15% 85%, rgba(5,150,105,0.10), transparent 42%),
+      radial-gradient(circle at 90% 92%, rgba(124,58,237,0.09), transparent 42%),
+      var(--color-bg);
+    background-attachment: fixed;
     font-family: var(--font);
     color: var(--color-text);
   }
@@ -44,11 +58,21 @@
   a { color: var(--color-accent-700); }
   a:hover { color: var(--color-accent-900); }
 
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
   .page {
     max-width: 210mm;
     margin: 0 auto;
     padding: 0 var(--space-4) var(--space-8);
     background: #ffffff;
+    box-shadow: 0 30px 80px rgba(30, 27, 75, 0.10);
   }
 
   header.trip-header {
@@ -66,29 +90,45 @@
     flex: 1;
     min-width: 0;
     font-family: var(--font);
-    font-weight: 600;
+    font-weight: 800;
     font-size: 2.375rem;
     margin: 0 0 var(--space-2);
     letter-spacing: -0.01em;
+    background: linear-gradient(100deg, var(--day1), var(--day2) 45%, var(--day3) 75%, var(--day5));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @media print {
+    h1.trip-title {
+      background: none;
+      -webkit-text-fill-color: initial;
+      color: var(--color-text);
+    }
   }
 
   .split-btn {
     flex-shrink: 0;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ffffff;
-    border: 1px solid var(--color-neutral-300);
-    border-radius: 0;
-    color: var(--color-accent-700);
+    background: linear-gradient(135deg, var(--day1), var(--day2));
+    border: none;
+    border-radius: 14px;
+    color: #ffffff;
     cursor: pointer;
     padding: 0;
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.28);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
   .split-btn:hover {
-    background: var(--color-neutral-300);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 12px 26px rgba(79, 70, 229, 0.36);
   }
 
   .split-btn svg {
@@ -100,7 +140,8 @@
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(29, 31, 32, 0.5);
+    background: rgba(29, 31, 32, 0.55);
+    backdrop-filter: blur(3px);
     z-index: 1000;
     align-items: flex-start;
     justify-content: center;
@@ -116,9 +157,17 @@
     background: #ffffff;
     max-width: 480px;
     width: 100%;
-    border: 1px solid var(--color-neutral-300);
+    border: none;
+    border-radius: 22px;
     padding: var(--space-6);
     margin: var(--space-6) 0;
+    box-shadow: 0 30px 70px rgba(30, 27, 75, 0.25);
+    animation: modalIn 0.3s cubic-bezier(.2,.8,.2,1);
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to   { opacity: 1; transform: none; }
   }
 
   .modal-header {
@@ -181,16 +230,22 @@
     background: transparent;
     color: var(--color-neutral-700);
     cursor: pointer;
-    border-radius: 0;
+    border-radius: 999px;
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .chip:hover {
+    transform: translateY(-1px);
   }
 
   .chip.selected {
-    background: var(--color-accent-700);
+    background: linear-gradient(135deg, var(--day1), var(--day2));
     color: #ffffff;
-    border-color: var(--color-accent-700);
+    border-color: transparent;
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.28);
   }
 
   .chip-remove {
@@ -210,34 +265,46 @@
     min-width: 0;
     font-family: var(--font);
     font-size: 0.875rem;
-    padding: 8px 10px;
+    padding: 9px 12px;
     border: 1px solid var(--color-neutral-300);
-    border-radius: 0;
+    border-radius: 12px;
     color: var(--color-text);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .split-input:focus {
+    outline: none;
+    border-color: var(--day1);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
   }
 
   .split-btn-primary {
     font-family: var(--font);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.875rem;
-    padding: 8px 16px;
-    background: var(--color-accent-700);
+    padding: 9px 18px;
+    background: linear-gradient(135deg, var(--day1), var(--day2));
     color: #ffffff;
     border: none;
     cursor: pointer;
-    border-radius: 0;
+    border-radius: 999px;
     white-space: nowrap;
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .split-btn-primary:hover {
-    background: var(--color-accent-900);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(79, 70, 229, 0.32);
   }
 
   .split-expense-form {
     display: none;
     border: 1px solid var(--color-neutral-300);
+    border-radius: 16px;
     padding: var(--space-4);
     margin-bottom: var(--space-3);
+    background: linear-gradient(180deg, rgba(79,70,229,0.03), transparent);
   }
 
   .expense-item {
@@ -294,8 +361,8 @@
   }
 
   .settlement-amount {
-    font-weight: 600;
-    color: var(--color-accent-700);
+    font-weight: 800;
+    color: var(--day4);
   }
 
   .split-empty {
@@ -332,23 +399,43 @@
   }
 
   .dot {
+    position: relative;
     width: 14px;
     height: 14px;
-    border: 2px solid var(--color-accent-700);
+    border: 2px solid var(--day-accent, var(--color-accent-700));
     border-radius: 50%;
-    background: var(--color-bg);
+    background: #ffffff;
     margin-top: 12px;
+    box-shadow: 0 0 0 4px var(--day-glow, transparent);
+    transition: transform 0.25s ease;
+  }
+
+  .dot::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid var(--day-accent, var(--color-accent-700));
+    opacity: 0;
+    animation: dotPulse 2.6s ease-out infinite;
+  }
+
+  @keyframes dotPulse {
+    0%   { opacity: 0.55; transform: scale(0.6); }
+    70%  { opacity: 0;    transform: scale(1.8); }
+    100% { opacity: 0;    transform: scale(1.8); }
   }
 
   .dot.dot-final {
-    background: var(--color-accent-500);
+    background: var(--day-accent, var(--color-accent-500));
   }
 
   .connector {
     width: 2px;
     flex: 1;
     min-height: 56px;
-    background: repeating-linear-gradient(to bottom, var(--color-neutral-400) 0 4px, transparent 4px 8px);
+    background: repeating-linear-gradient(to bottom, var(--day-accent, var(--color-neutral-400)) 0 4px, transparent 4px 8px);
+    opacity: 0.55;
   }
 
   .day-content {
@@ -357,7 +444,18 @@
   }
 
   .day-inner {
-    padding: 0;
+    padding: var(--space-5);
+    background: #ffffff;
+    border: 1px solid var(--color-neutral-300);
+    border-left: 4px solid var(--day-accent, var(--color-accent-700));
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(30, 27, 75, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .day-inner:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(30, 27, 75, 0.11);
   }
 
   .day-kicker-row {
@@ -368,8 +466,8 @@
 
   .day-num {
     font-size: 1.375rem;
-    font-weight: 600;
-    color: #1B75CC;
+    font-weight: 800;
+    color: var(--day-accent, #1B75CC);
   }
 
   .day-date {
@@ -387,15 +485,16 @@
     letter-spacing: 0.02em;
     padding: 3px 10px;
     border-radius: 999px;
-    background: var(--color-accent-700);
+    background: var(--day-accent, var(--color-accent-700));
     color: #ffffff;
+    box-shadow: 0 3px 10px var(--day-glow, transparent);
   }
 
   .day-title {
     font-size: 1.375rem;
     margin-top: var(--space-1);
     margin-bottom: var(--space-3);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .route-strip {
@@ -419,7 +518,7 @@
     flex: 1;
     position: relative;
     height: 2px;
-    background: repeating-linear-gradient(to right, var(--color-accent-700) 0 6px, transparent 6px 12px);
+    background: repeating-linear-gradient(to right, var(--day-accent, var(--color-accent-700)) 0 6px, transparent 6px 12px);
   }
 
   .route-badge-wrap {
@@ -431,12 +530,13 @@
     display: inline-block;
     font-family: var(--font);
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.02em;
-    padding: 6px 14px;
-    background: var(--color-accent-700);
+    padding: 6px 16px;
+    background: var(--day-accent, var(--color-accent-700));
     color: #ffffff;
-    border-radius: 0;
+    border-radius: 999px;
+    box-shadow: 0 6px 18px var(--day-glow, transparent);
   }
 
   .places-grid {
@@ -445,13 +545,23 @@
     gap: var(--space-4);
   }
 
+  .places-grid > div {
+    overflow: hidden;
+    border-radius: 14px;
+  }
+
   .place-photo {
     width: 100%;
     height: 140px;
     object-fit: cover;
-    border-radius: 0;
+    border-radius: 14px;
     display: block;
     background: var(--color-neutral-300);
+    transition: transform 0.45s cubic-bezier(.2,.8,.2,1);
+  }
+
+  .places-grid > div:hover .place-photo {
+    transform: scale(1.08);
   }
 
   .place-photo-placeholder {
@@ -465,6 +575,7 @@
     background: var(--color-neutral-300);
     color: var(--color-neutral-700);
     font-size: 0.75rem;
+    border-radius: 14px;
   }
 
   .place-name {
@@ -478,13 +589,16 @@
     margin-top: 2px;
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--color-accent-700);
+    color: var(--day-accent, var(--color-accent-700));
     text-decoration: none;
+    transition: transform 0.2s ease;
   }
 
   .place-map-link:hover {
     color: var(--color-accent-900);
     text-decoration: underline;
+    transform: translateX(2px);
+    display: inline-block;
   }
 
   .day-map {
@@ -496,6 +610,7 @@
     width: 100%;
     height: 220px;
     border: 1px solid var(--color-neutral-300);
+    border-radius: 14px;
   }
 
   .map-actions {
@@ -506,25 +621,32 @@
 
   .map-link {
     font-size: 0.8125rem;
-    font-weight: 600;
-    color: var(--color-accent-700);
+    font-weight: 700;
+    color: var(--day-accent, var(--color-accent-700));
     text-decoration: none;
+    transition: transform 0.2s ease;
+    display: inline-block;
   }
 
   .map-link:hover {
     color: var(--color-accent-900);
     text-decoration: underline;
+    transform: translateX(2px);
   }
 
   .day-divider {
     height: 1px;
-    background: var(--color-neutral-300);
+    background: linear-gradient(to right, var(--color-neutral-300), transparent);
     margin: 0 0 var(--space-4) 40px;
   }
 
   section.leg-table-section {
-    padding: var(--space-6) 0;
-    border-top: 1px solid var(--color-neutral-300);
+    padding: var(--space-6);
+    margin-top: var(--space-4);
+    background: #ffffff;
+    border: 1px solid var(--color-neutral-300);
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(30, 27, 75, 0.06);
   }
 
   table.leg-table {
@@ -565,7 +687,20 @@
   .stat-value {
     font-family: var(--font);
     font-size: 1.75rem;
-    font-weight: 600;
+    font-weight: 800;
+    background: linear-gradient(100deg, var(--day1), var(--day5));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @media print {
+    .stat-value {
+      background: none;
+      -webkit-text-fill-color: initial;
+      color: var(--color-text);
+    }
   }
 
   @media (max-width: 640px) {
@@ -578,11 +713,30 @@
     .places-grid { grid-template-columns: 1fr; }
   }
 
+  /* ── Scroll-reveal: each day fades/rises into view as it's scrolled to ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
   @media print {
     @page { size: A4; }
     body { background: #ffffff; }
+    .page { box-shadow: none; }
     .day-row { break-inside: avoid; page-break-inside: avoid; }
     .no-print { display: none !important; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+    .dot::after { display: none; }
+    .day-inner { box-shadow: none; transform: none; }
+    .day-inner:hover { box-shadow: none; transform: none; }
+    section.leg-table-section { box-shadow: none; }
+    .tag-accent, .time-pill { box-shadow: none; }
   }
 </style>
 </head>
@@ -606,7 +760,7 @@
     <h2 class="section-heading">Route &amp; day-by-day plan</h2>
 
     <!-- Day 1 -->
-    <div class="day-row">
+    <div class="day-row reveal" style="--day-accent:var(--day1);--day-glow:var(--day1-glow);">
       <div class="rail">
         <div class="dot"></div>
         <div class="connector"></div>
@@ -641,7 +795,7 @@
     <div class="day-divider"></div>
 
     <!-- Day 2 -->
-    <div class="day-row">
+    <div class="day-row reveal" style="--day-accent:var(--day2);--day-glow:var(--day2-glow);">
       <div class="rail">
         <div class="dot"></div>
         <div class="connector"></div>
@@ -692,7 +846,7 @@
     </div>
 
     <!-- Day 3 -->
-    <div class="day-row">
+    <div class="day-row reveal" style="--day-accent:var(--day3);--day-glow:var(--day3-glow);">
       <div class="rail">
         <div class="dot"></div>
         <div class="connector"></div>
@@ -748,7 +902,7 @@
     </div>
 
     <!-- Day 4 -->
-    <div class="day-row">
+    <div class="day-row reveal" style="--day-accent:var(--day4);--day-glow:var(--day4-glow);">
       <div class="rail">
         <div class="dot"></div>
         <div class="connector"></div>
@@ -799,7 +953,7 @@
     </div>
 
     <!-- Day 5 -->
-    <div class="day-row">
+    <div class="day-row reveal" style="--day-accent:var(--day5);--day-glow:var(--day5-glow);">
       <div class="rail">
         <div class="dot"></div>
         <div class="connector"></div>
@@ -865,7 +1019,7 @@
     </div>
 
     <!-- Day 6 (final) -->
-    <div class="day-row">
+    <div class="day-row reveal" style="--day-accent:var(--day6);--day-glow:var(--day6-glow);">
       <div class="rail">
         <div class="dot dot-final"></div>
       </div>
@@ -1192,6 +1346,24 @@
   });
 
   render();
+})();
+
+// Scroll-reveal: fade/rise each day card in as it enters the viewport.
+(function () {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window) || !els.length) {
+    els.forEach(function (el) { el.classList.add('visible'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function (el) { io.observe(el); });
 })();
 </script>
 
